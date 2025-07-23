@@ -34,7 +34,7 @@ Diseñar una interfaz musical sencilla y estética que simule la experiencia de 
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/tu-usuario/mi-proyecto-lofi.git
+git clone https://github.com/jose21wp/react-music-app.git
 cd react-music-app/
 
 # Instalar dependencias
