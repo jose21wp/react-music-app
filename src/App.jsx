@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import React, { useState, useEffect } from "react";
+import PlayerCard from "./components/PlayerCard";
+import SongItem from "./components/SongItem";
+import Sidebar from "./components/Sidebar";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [songs, setSongs] = useState([]);
+  useEffect(() => {
+    fetch("https://api.deezer.com/search?q=cat")
+      .then((res) => res.json())
+      .then((data) => setSongs(data.data)) // Deezer devuelve un array en "data"
+      .catch((err) => console.error(err));
+  }, []);
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="flex">
+      <Sidebar />
+      <main className="flex-1 p-6">
+        <PlayerCard />
+        <div className="mt-6">
+          <h3 className="text-lg font-semibold mb-2">Popular</h3>
+          <div>
+            <h2>Canciones populares</h2>
+            <ul>
+              {songs.map((song) => (
+                <li key={song.id}>
+                  {song.title} - {song.artist.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/*       <SongItem
+            title="Atrápalos Ya!"
+            artist="Pokémon"
+            image="/assets/pokemon.jpg"
+          />
+          <SongItem
+            title="Cazzu con Catch me"
+            artist="Cazzu"
+            image="/assets/cazzu.jpg"
+          /> */}
+        </div>
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
