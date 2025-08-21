@@ -9,7 +9,6 @@ export default function Sidebar() {
       {/* Navegación principal */}
       <nav className="flex flex-col gap-4">
         <NavItem icon={<FaHome />} label="Inicio" />
-        <NavItem icon={<FaSearch />} label="Buscar" />
         <NavItem icon={<FaBook />} label="Tu biblioteca" />
       </nav>
 
